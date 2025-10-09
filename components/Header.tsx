@@ -8,14 +8,15 @@ const Header = () => {
     return (
         <header className=" sticky top-0 header">
             <div className="container header-wrapper">
-                <Link href="/">
+                <Link href="/" className="flex items-center gap-1">
                     <Image
-                        src="/assets/icons/logo.svg"
+                        src="/assets/icons/Group.png"
                         alt="Signalist Logo"
                         width={120}
                         height={40}
                         className="h-8 w-auto crusor-pointer"
                     />
+                    <p className="text-2xl font-bold text-gray-500">TRADEX</p>
                 </Link>
                 <nav className="hidden sm:block">
                     <NavItems />
