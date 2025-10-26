@@ -1,0 +1,116 @@
+'use client'
+import { useForm } from 'react-hook-form'
+import { Button } from '@/components/ui/button';
+import InputField from '@/components/forms/InputField';
+import SelectField from '@/components/forms/SelectField';
+import { INVESTMENT_GOALS, PREFERRED_INDUSTRIES, RISK_TOLERANCE_OPTIONS } from '@/lib/constants';
+import {CountrySelectField} from "@/components/forms/CountrySelectField";
+import FooterLink from '@/components/forms/FooterLink';
+
+const SignUp = () => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isSubmitting },
+  } = useForm<SignUpFormData>({
+    defaultValues: {
+      fullName: '',
+      email: '',
+      password: '',
+      country: '',
+      investmentGoals: 'Growth',
+      riskTolerance: 'Medium',
+      preferredIndustry: 'Technology',
+    },
+    mode: 'onBlur',
+  },);
+  const onSubmit = async (data: SignInFormData) => {
+    try {
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  return (
+    <>
+      <h1 className='form-title mt-6'>Sign Up & Persnolized</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
+        <InputField
+          name='fullName'
+          label='Full Name'
+          register={register}
+          error={errors.fullName}
+          validation={{ required: 'Full Name is required', minLength: 2 }}
+          placeholder='Ranjan Dora'
+        />
+
+        <InputField
+          name='email'
+          label='Email'
+          register={register}
+          placeholder='ranjan@example.com'
+          error={errors.email}
+          validation={{ required: 'Email is required', pattern: /^\S+@\S+$/i, message: 'Invalid email address' }}
+        />
+
+        <InputField
+          name='password'
+          label='Password'
+          type='password'
+          placeholder='Enter a Strong password'
+          register={register}
+          error={errors.password}
+          validation={{ required: 'Password is required', minLength: 8 }}
+        />
+
+        <CountrySelectField
+          name= "country"
+          label="Country"
+          control={control}
+          error={errors.country}
+          required
+          />
+
+        <SelectField
+          name="inverstmentGoals"
+          label="Investment Goals"
+          placeholder="Select your investment goals"
+          options={INVESTMENT_GOALS}
+          control={control}
+          error={errors.investmentGoals}
+          required
+        />
+
+        <SelectField
+          name="riskTolerance"
+          label="Risk Tolerance"
+          placeholder="Select your risk level"
+          options={RISK_TOLERANCE_OPTIONS}
+          control={control}
+          error={errors.riskTolerance}
+          required
+        />
+
+        <SelectField
+          name="preferredIndustry"
+          label="Preferred Industry"
+          placeholder="Select your preferred industry"
+          options={PREFERRED_INDUSTRIES}
+          control={control}
+          error={errors.preferredIndustry}
+          required
+        />
+
+
+        <Button type='submit' disabled={isSubmitting} className='gray-btn font-bold w-auto mx-auto block'>
+          {isSubmitting ? 'Creating account' : 'Start Your Inveting Journey'}
+        </Button>
+
+        <FooterLink text="Already have an acccount?" linkText="Sign in" href="/sign-in" />
+      </form>
+    </>
+  )
+}
+
+export default SignUp
