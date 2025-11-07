@@ -1,9 +1,14 @@
-'use client'
-
 import Link from "next/link"
 import Image from "next/image"
+import { auth } from "@/lib/better-auth/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({ children }: { children: React.ReactNode }) => {
+    const session = await auth.api.getSession({ headers: await headers() })
+
+    if (session?.user) redirect('/')
+
     return (
         <main className="auth-layut flex">
             <section className="auth-left-section">
@@ -25,7 +30,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     <h2 className="text-4xl font-bold bg-gradient-to-r from-gray-400 via-gray-600 to-gray-400 bg-clip-text text-transparent mb-3 tracking-wider">
                         TRADEX
                     </h2>
-                     <p className="text-2xl font-medium bg-gradient-to-r from-gray-500 via-gray-400 to-gray-500 bg-clip-text text-transparent">
+                    <p className="text-2xl font-medium bg-gradient-to-r from-gray-500 via-gray-400 to-gray-500 bg-clip-text text-transparent">
                         Real-time signals and  analytics
                     </p>
                 </div>
@@ -40,17 +45,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
                 </div>
             </section>
-
-            <style jsx>{`
-                @keyframes float {
-                    0%, 100% { transform: translateY(0); }
-                    50% { transform: translateY(-15px); }
-                }
-
-                :global(.animate-float) {
-                    animation: float 4s ease-in-out infinite;
-                }
-            `}</style>
         </main>
     )
 }
