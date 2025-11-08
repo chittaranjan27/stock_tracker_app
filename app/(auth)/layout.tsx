@@ -15,12 +15,12 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
                 <Link href="/" className=" flex items-center gap-1 auth-logo ">
                     <Image
                         src="/assets/icons/Group.png"
-                        alt="Signalist Logo"
+                        alt="TradeX Logo"
                         width={120}
                         height={30}
                         className="h-5 w-auto crusor-pointer"
                     />
-                    <p className="text-xl font-bold bg-gradient-to-r from-gray-500 via-gray-600 to-gray-500 bg-clip-text text-transparent">TRADEX</p>
+                    <p className="text-xl font-bold bg-gradient-to-r from-gray-500 via-gray-600 to-gray-500 bg-clip-text text-transparent">TradeX</p>
                 </Link>
                 <div className="pb-6 lg:pb-8 flex-1">{children}</div>
             </section>
@@ -28,7 +28,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             <section className="auth-right-section">
                 <div className=" text-center px-8 ">
                     <h2 className="text-4xl font-bold bg-gradient-to-r from-gray-400 via-gray-600 to-gray-400 bg-clip-text text-transparent mb-3 tracking-wider">
-                        TRADEX
+                        TradeX
                     </h2>
                     <p className="text-2xl font-medium bg-gradient-to-r from-gray-500 via-gray-400 to-gray-500 bg-clip-text text-transparent">
                         Real-time signals and  analytics

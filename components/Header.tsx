@@ -11,12 +11,12 @@ const Header = ({user}: {user: User} ) => {
                 <Link href="/" className="flex items-center gap-1">
                     <Image
                         src="/assets/icons/Group.png"
-                        alt="Signalist Logo"
+                        alt="TradeX Logo"
                         width={120}
                         height={40}
                         className="h-8 w-auto crusor-pointer"
                     />
-                    <p className="text-2xl font-bold text-gray-500">TRADEX</p>
+                    <p className="text-2xl font-bold text-gray-500">TradeX</p>
                 </Link>
                 <nav className="hidden sm:block">
                     <NavItems />
