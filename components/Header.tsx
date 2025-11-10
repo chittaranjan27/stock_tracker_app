@@ -2,7 +2,6 @@ import NavItems from "./NavItems"
 import UserDropdown from "./UserDropdown"
 import Link from "next/link"
 import Image from "next/image"
-import { User } from "lucide-react"
 
 const Header = ({user}: {user: User} ) => {
     return (
@@ -16,7 +15,7 @@ const Header = ({user}: {user: User} ) => {
                         height={40}
                         className="h-8 w-auto crusor-pointer"
                     />
-                    <p className="text-2xl font-bold text-gray-500">TradeX</p>
+                    <p className="text-2xl font-bold text-gray-500">tradeX</p>
                 </Link>
                 <nav className="hidden sm:block">
                     <NavItems />
