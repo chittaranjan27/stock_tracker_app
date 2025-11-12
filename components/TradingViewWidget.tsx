@@ -15,16 +15,13 @@ interface TradingViewWidgetProps {
 const TradingViewWidget = ({ title, scriptUrl, config, height = 600, className }: TradingViewWidgetProps) => {
     const containerRef = UseTradingViewWidget(scriptUrl, config, height);
 
-
     return (
         <div className='w-full'>
-            {title && <h3 className= 'font-semibold text-2xl text-gray-100 mb-2'>{title}</h3>}
-            <div className = {cn('tradingview-widget-container', className)} ref={containerRef} style={{ height: "100%", width: "100%" }}>
-                <div className="tradingview-widget-container__widget" style={{ height , width: "100%"}}/>
-                <div className="tradingview-widge-container"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener nofollow" target="_blank"><span className="blue-text">AAPL stock chart</span></a><span className="trademark"> by TradingView</span></div>
+            {title && <h3 className='font-semibold text-2xl text-gray-100 mb-2'>{title}</h3>}
+            <div className={cn('tradingview-widget-container', className)} ref={containerRef} style={{ height: "100%", width: "100%" }}>
+                <div className="tradingview-widget-container__widget" style={{ height, width: "100%" }} />
             </div>
-        </div> 
-
+        </div>
     );
 }
 

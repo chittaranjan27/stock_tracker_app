@@ -30,13 +30,7 @@ export default async function StockDetails({ params }: StockDetailsPageProps) {
             className="custom-chart"
             height={600}
           />
-
-          <TradingViewWidget
-            scriptUrl={`${scriptUrl}advanced-chart.js`}
-            config={BASELINE_WIDGET_CONFIG(symbol)}
-            className="custom-chart"
-            height={600}
-          />
+          
         </div>
 
         {/* Right column */}
