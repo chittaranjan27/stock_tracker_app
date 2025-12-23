@@ -346,6 +346,8 @@ For issues, bugs, or feature requests, please open an issue on GitHub.
 
 ## Acknowledgments
 
+Live link:- https://stock-tracker-app-one.vercel.app/sign-in
+
 - [TradingView](https://www.tradingview.com/) - Financial charts and widgets
 - [Finnhub](https://finnhub.io/) - Stock market data API
 - [better-auth](https://www.better-auth.com/) - Authentication library
