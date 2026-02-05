@@ -114,6 +114,7 @@ declare global {
     type QuoteData = {
         c?: number;
         dp?: number;
+        t?: number;
     };
 
     type ProfileData = {
@@ -147,6 +148,17 @@ declare global {
         changeFormatted?: string;
         marketCap?: string;
         peRatio?: string;
+    };
+
+    type PortfolioHoldingWithQuote = {
+        _id: string;
+        userId: string;
+        symbol: string;
+        buyPrice: number;
+        quantity: number;
+        addedAt: Date;
+        currentPrice?: number;
+        changePercent?: number;
     };
 
     type AlertsListProps = {

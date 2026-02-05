@@ -1,4 +1,5 @@
 import Header from "@/components/Header"
+import PriceStreamProvider from "@/components/PriceStreamProvider"
 import { auth } from "@/lib/better-auth/auth"
 import { redirect } from "next/navigation"
 import { headers } from "next/headers"
@@ -15,12 +16,14 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <main className="min-h-screen text-gray-400">
-      <Header user = {user} />
-      <div className="container py-10">
-        {children}
-      </div>
-    </main>
+    <PriceStreamProvider>
+      <main className="min-h-screen text-gray-400">
+        <Header user = {user} />
+        <div className="container py-10">
+          {children}
+        </div>
+      </main>
+    </PriceStreamProvider>
   )
 }
 

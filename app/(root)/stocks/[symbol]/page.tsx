@@ -1,9 +1,9 @@
 import TradingViewWidget from "@/components/TradingViewWidget";
 import WatchlistButton from "@/components/WatchlistButton";
+import StockPriceTicker from "@/components/StockPriceTicker";
 import {
   SYMBOL_INFO_WIDGET_CONFIG,
   CANDLE_CHART_WIDGET_CONFIG,
-  BASELINE_WIDGET_CONFIG,
   TECHNICAL_ANALYSIS_WIDGET_CONFIG,
   COMPANY_PROFILE_WIDGET_CONFIG,
   COMPANY_FINANCIALS_WIDGET_CONFIG,
@@ -11,6 +11,7 @@ import {
 import { auth } from "@/lib/better-auth/auth";
 import { headers } from "next/headers";
 import { getWatchlistByUserId } from "@/lib/actions/watchlist.actions";
+import { getQuoteSnapshot } from "@/lib/actions/finnhub.actions";
 
 export default async function StockDetails({ params }: StockDetailsPageProps) {
   const { symbol } = await params;
@@ -18,6 +19,7 @@ export default async function StockDetails({ params }: StockDetailsPageProps) {
   const userId = session?.user?.id ?? "";
   const watchlist = userId ? await getWatchlistByUserId(userId) : [];
   const isInWatchlist = watchlist.some((item) => item.symbol === symbol.toUpperCase());
+  const quote = await getQuoteSnapshot(symbol.toUpperCase());
   const scriptUrl = `https://s3.tradingview.com/external-embedding/embed-widget-`;
 
   return (
@@ -43,6 +45,11 @@ export default async function StockDetails({ params }: StockDetailsPageProps) {
         {/* Right column */}
         <div className="flex flex-col gap-6">
           <div className="flex items-center justify-between">
+            <StockPriceTicker
+              symbol={symbol.toUpperCase()}
+              currentPrice={quote?.c}
+              changePercent={quote?.dp}
+            />
             <WatchlistButton
               symbol={symbol.toUpperCase()}
               company={symbol.toUpperCase()}

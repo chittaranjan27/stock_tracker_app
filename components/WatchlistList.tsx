@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { Trash2 } from "lucide-react";
-import { getChangeColorClass } from "@/lib/utils";
+import { formatChangePercent, formatPrice, getChangeColorClass } from "@/lib/utils";
+import { usePriceStream } from "@/hooks/usePriceStream";
 
 type WatchlistListProps = {
   initialWatchlist: StockWithData[];
@@ -16,6 +17,18 @@ const WatchlistList = ({ initialWatchlist }: WatchlistListProps) => {
   const ordered = useMemo(() => {
     return [...items].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   }, [items]);
+
+  const streamSymbols = useMemo(
+    () =>
+      ordered.map((item) => ({
+        symbol: item.symbol,
+        currentPrice: item.currentPrice,
+        changePercent: item.changePercent,
+      })),
+    [ordered]
+  );
+
+  const { prices } = usePriceStream(streamSymbols);
 
   const handleRemove = async (symbol: string) => {
     const prev = items;
@@ -60,16 +73,27 @@ const WatchlistList = ({ initialWatchlist }: WatchlistListProps) => {
             key={item.symbol}
             className="grid grid-cols-12 px-4 py-3 items-center text-gray-100 hover:bg-gray-700/50 transition-colors"
           >
+            {(() => {
+              const live = prices[item.symbol];
+              const priceValue = live?.price ?? item.currentPrice;
+              const changeValue = live?.changePercent ?? item.changePercent;
+              const priceFormatted =
+                typeof priceValue === "number" ? formatPrice(priceValue) : item.priceFormatted || "N/A";
+              const changeFormatted =
+                typeof changeValue === "number" ? formatChangePercent(changeValue) : item.changeFormatted || "N/A";
+
+              return (
+                <>
             <div className="col-span-4">
               <Link href={`/stocks/${item.symbol}`} className="font-medium hover:text-yellow-500">
                 {item.company || item.symbol}
               </Link>
             </div>
             <div className="col-span-2 text-sm text-gray-400">{item.symbol}</div>
-            <div className="col-span-2 text-right text-sm">{item.priceFormatted || "N/A"}</div>
+            <div className="col-span-2 text-right text-sm">{priceFormatted}</div>
             <div className="col-span-2 text-right text-sm">
-              <span className={getChangeColorClass(item.changePercent)}>
-                {item.changeFormatted || "N/A"}
+              <span className={getChangeColorClass(changeValue)}>
+                {changeFormatted}
               </span>
             </div>
             <div className="col-span-2 flex items-center justify-end">
@@ -81,6 +105,9 @@ const WatchlistList = ({ initialWatchlist }: WatchlistListProps) => {
                 <Trash2 className="h-4 w-4" />
               </button>
             </div>
+                </>
+              );
+            })()}
           </div>
         ))}
       </div>
