@@ -216,7 +216,6 @@ npx ts-node scripts/test-db.ts
 | `INNGEST_SIGNING_KEY` | Inngest webhook signing key | `signkey_abc123` |
 | `EMAIL_USER` | Nodemailer sender email | `noreply@tradex.com` |
 | `EMAIL_PASSWORD` | Nodemailer password or app password | `your-app-password` |
-| `NEXT_PUBLIC_APP_URL` | Public app URL (used in emails) | `https://stock-market-dev.vercel.app` |
 
 ## API Routes
 
@@ -345,17 +344,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 For issues, bugs, or feature requests, please open an issue on GitHub.
 
-## Roadmap
-
-- [ ] Real-time price alerts
-- [ ] Portfolio performance tracking
-- [ ] Advanced charting with technical indicators
-- [ ] Social features (share watchlists)
-- [ ] Mobile app (React Native)
-- [ ] Dark/light theme toggle
-- [ ] Multi-currency support
-
 ## Acknowledgments
+
+Live link:- https://stock-tracker-app-one.vercel.app/sign-in
 
 - [TradingView](https://www.tradingview.com/) - Financial charts and widgets
 - [Finnhub](https://finnhub.io/) - Stock market data API
