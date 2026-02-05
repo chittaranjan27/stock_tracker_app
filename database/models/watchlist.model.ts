@@ -5,6 +5,7 @@ export interface WatchlistItem extends Document {
   symbol: string;
   company: string;
   addedAt: Date;
+  order: number;
 }
 
 const WatchlistSchema = new Schema<WatchlistItem>(
@@ -13,12 +14,14 @@ const WatchlistSchema = new Schema<WatchlistItem>(
     symbol: { type: String, required: true, uppercase: true, trim: true },
     company: { type: String, required: true, trim: true },
     addedAt: { type: Date, default: Date.now },
+    order: { type: Number, default: 0 },
   }, 
   { timestamps: false }
 );
 
 // Prevent duplicate symbols per user
 WatchlistSchema.index({ userId: 1, symbol: 1 }, { unique: true });
+WatchlistSchema.index({ userId: 1, order: 1 });
 
 export const Watchlist: Model<WatchlistItem> =
   (models?.Watchlist as Model<WatchlistItem>) || model<WatchlistItem>('Watchlist', WatchlistSchema);

@@ -140,6 +140,7 @@ declare global {
         symbol: string;
         company: string;
         addedAt: Date;
+        order?: number;
         currentPrice?: number;
         changePercent?: number;
         priceFormatted?: string;

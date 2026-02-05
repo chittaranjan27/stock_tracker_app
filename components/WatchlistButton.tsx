@@ -1,9 +1,6 @@
 "use client";
 import React, { useMemo, useState } from "react";
-
-// Minimal WatchlistButton implementation to satisfy page requirements.
-// This component focuses on UI contract only. It toggles local state and
-// calls onWatchlistChange if provided. Styling hooks match globals.css.
+import { toast } from "sonner";
 
 const WatchlistButton = ({
   symbol,
@@ -14,16 +11,42 @@ const WatchlistButton = ({
   onWatchlistChange,
 }: WatchlistButtonProps) => {
   const [added, setAdded] = useState<boolean>(!!isInWatchlist);
+  const [isSaving, setIsSaving] = useState(false);
 
   const label = useMemo(() => {
     if (type === "icon") return added ? "" : "";
-    return added ? "Remove from Watchlist" : "Add to Watchlist";
+    return added ? "Saved" : "Add to Watchlist";
   }, [added, type]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    if (isSaving) return;
     const next = !added;
     setAdded(next);
+    setIsSaving(true);
     onWatchlistChange?.(symbol, next);
+
+    try {
+      if (next) {
+        const res = await fetch("/api/watchlist", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ symbol, company }),
+        });
+        if (!res.ok) throw new Error("Failed to add");
+      } else {
+        const res = await fetch(`/api/watchlist/${encodeURIComponent(symbol)}`, {
+          method: "DELETE",
+        });
+        if (!res.ok) throw new Error("Failed to remove");
+      }
+    } catch (err) {
+      console.error("watchlist toggle error:", err);
+      setAdded(!next);
+      toast.error("Watchlist update failed. Please try again.");
+      onWatchlistChange?.(symbol, !next);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   if (type === "icon") {
@@ -53,7 +76,11 @@ const WatchlistButton = ({
   }
 
   return (
-    <button className={`watchlist-btn ${added ? "watchlist-remove" : ""}`} onClick={handleClick}>
+    <button
+        className={`watchlist-btn ${added && showTrashIcon ? "watchlist-remove" : ""}`}
+        onClick={handleClick}
+        disabled={isSaving}
+      >
       {showTrashIcon && added ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
