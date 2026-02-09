@@ -174,16 +174,19 @@
     @apply flex justify-between items-center px-6 py-4 text-gray-500;
   }
   .auth-layout {
-    @apply flex flex-col justify-between lg:flex-row h-screen bg-gray-900 relative overflow-hidden;
+    @apply flex min-h-screen flex-col items-stretch lg:flex-row lg:h-screen bg-gray-900 relative overflow-hidden;
   }
   .auth-logo {
     @apply pt-6 lg:pt-8 mb-8 lg:mb-12;
   }
   .auth-left-section {
-    @apply w-full lg:w-[45%] lg:h-screen px-6 lg:px-16 flex flex-col overflow-y-auto;
+    @apply w-full lg:w-[45%] lg:h-screen px-4 sm:px-6 lg:px-16 py-6 lg:py-10 flex flex-col overflow-y-auto;
+  }
+  .auth-form-wrapper {
+    @apply w-full max-w-[560px] mx-auto lg:mx-0 flex-1 pb-6 lg:pb-8;
   }
   .auth-right-section {
-    @apply w-full max-lg:border-t max-lg:border-gray-600 lg:w-[55%] lg:h-screen bg-gray-800 px-6 py-4 md:p-6 lg:py-12 lg:px-18 flex flex-col justify-start;
+    @apply w-full border-t border-gray-600 lg:border-t-0 lg:w-[55%] lg:h-screen bg-gray-800 px-4 sm:px-6 md:px-8 py-8 lg:py-12 lg:px-18 flex flex-col items-center lg:items-start justify-start;
   }
   .auth-blockquote {
     @apply text-sm md:text-xl lg:text-2xl font-medium text-gray-400 mb-1 md:mb-6 lg:mb-8;
@@ -195,7 +198,7 @@
     @apply border-6 border-gray-800 left-0 hidden w-[1024px] h-auto max-w-none lg:block rounded-xl shadow-2xl;
   }
   .form-title {
-    @apply text-4xl font-bold text-gray-400 mb-10;
+    @apply text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-400 mb-6 sm:mb-8 lg:mb-10;
   }
   .form-label {
     @apply text-sm font-medium text-gray-400;

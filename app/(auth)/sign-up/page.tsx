@@ -44,75 +44,90 @@ const SignUp = () => {
   return (
     <>
       <h1 className='form-title mt-6'>Sign Up & Persnolized</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
-        <InputField
-          name='fullName'
-          label='Full Name'
-          register={register}
-          error={errors.fullName}
-          validation={{ required: 'Full Name is required', minLength: 2 }}
-          placeholder='Ranjan Dora'
-        />
-
-        <InputField
-          name='email'
-          label='Email'
-          register={register}
-          placeholder='ranjan@example.com'
-          error={errors.email}
-          validation={{ required: 'Email is required', pattern: /^\S+@\S+$/i, message: 'Invalid email address' }}
-        />
-
-        <InputField
-          name='password'
-          label='Password'
-          type='password'
-          placeholder='Enter a Strong password'
-          register={register}
-          error={errors.password}
-          validation={{ required: 'Password is required', minLength: 8 }}
-        />
-
-        <CountrySelectField
-          name= "country"
-          label="Country"
-          control={control}
-          error={errors.country}
-          required
+      <form onSubmit={handleSubmit(onSubmit)} className='space-y-6 w-full'>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <InputField
+            name='fullName'
+            label='Full Name'
+            register={register}
+            error={errors.fullName}
+            validation={{ required: 'Full Name is required', minLength: 2 }}
+            placeholder='Ranjan Dora'
           />
 
-        <SelectField
-          name="inverstmentGoals"
-          label="Investment Goals"
-          placeholder="Select your investment goals"
-          options={INVESTMENT_GOALS}
-          control={control}
-          error={errors.investmentGoals}
-          required
-        />
+          <InputField
+            name='email'
+            label='Email'
+            register={register}
+            placeholder='ranjan@example.com'
+            error={errors.email}
+            validation={{ required: 'Email is required', pattern: /^\S+@\S+$/i, message: 'Invalid email address' }}
+          />
 
-        <SelectField
-          name="riskTolerance"
-          label="Risk Tolerance"
-          placeholder="Select your risk level"
-          options={RISK_TOLERANCE_OPTIONS}
-          control={control}
-          error={errors.riskTolerance}
-          required
-        />
+          <div className="sm:col-span-2">
+            <InputField
+              name='password'
+              label='Password'
+              type='password'
+              placeholder='Enter a Strong password'
+              register={register}
+              error={errors.password}
+              validation={{ required: 'Password is required', minLength: 8 }}
+            />
+          </div>
 
-        <SelectField
-          name="preferredIndustry"
-          label="Preferred Industry"
-          placeholder="Select your preferred industry"
-          options={PREFERRED_INDUSTRIES}
-          control={control}
-          error={errors.preferredIndustry}
-          required
-        />
+          <div className="sm:col-span-2">
+            <CountrySelectField
+              name= "country"
+              label="Country"
+              control={control}
+              error={errors.country}
+              required
+            />
+          </div>
 
+          <div className="sm:col-span-2">
+            <SelectField
+              name="inverstmentGoals"
+              label="Investment Goals"
+              placeholder="Select your investment goals"
+              options={INVESTMENT_GOALS}
+              control={control}
+              error={errors.investmentGoals}
+              required
+            />
+          </div>
 
-        <Button type='submit' disabled={isSubmitting} className='gray-btn font-bold w-auto mx-auto block'>
+          <div className="sm:col-span-2">
+            <SelectField
+              name="riskTolerance"
+              label="Risk Tolerance"
+              placeholder="Select your risk level"
+              options={RISK_TOLERANCE_OPTIONS}
+              control={control}
+              error={errors.riskTolerance}
+              required
+            />
+          </div>
+
+          <div className="sm:col-span-2">
+            <SelectField
+              name="preferredIndustry"
+              label="Preferred Industry"
+              placeholder="Select your preferred industry"
+              options={PREFERRED_INDUSTRIES}
+              control={control}
+              error={errors.preferredIndustry}
+              required
+            />
+          </div>
+        </div>
+
+        <Button
+          type='submit'
+          disabled={isSubmitting}
+          className='gray-btn font-bold w-full sm:w-auto sm:mx-0 mx-auto block'
+        >
           {isSubmitting ? 'Creating account' : 'Start Your Inveting Journey'}
         </Button>
 

@@ -10,7 +10,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
     if (session?.user) redirect('/')
 
     return (
-        <main className="auth-layut flex">
+        <main className="auth-layout">
             <section className="auth-left-section">
                 <Link href="/" className=" flex items-center gap-1 auth-logo ">
                     <Image
@@ -22,7 +22,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
                     />
                     <p className="text-xl font-bold bg-gradient-to-r from-gray-500 via-gray-600 to-gray-500 bg-clip-text text-transparent">tradeX</p>
                 </Link>
-                <div className="pb-6 lg:pb-8 flex-1">{children}</div>
+                <div className="auth-form-wrapper">{children}</div>
             </section>
 
             <section className="auth-right-section">
@@ -40,7 +40,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
                         alt="Dashboard Preview"
                         width={1440}
                         height={1550}
-                        className="auto-dashboard-preview absolute top-0 animate-float"
+                        className="auth-dashboard-preview absolute top-0 animate-float"
                     />
 
                 </div>

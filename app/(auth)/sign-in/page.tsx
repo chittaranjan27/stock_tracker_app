@@ -38,7 +38,7 @@ const SignIn = () => {
     <>
       <h1 className="form-title">Welcome back</h1>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 w-full">
         <InputField
           name="email"
           label="Email"
@@ -58,7 +58,11 @@ const SignIn = () => {
           validation={{ required: 'Password is required', minLength: 8 }}
         />
 
-        <Button type="submit" disabled={isSubmitting} className="gray-btn font-bold w-auto mx-auto block">
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          className="gray-btn font-bold w-full sm:w-auto sm:mx-0 mx-auto block"
+        >
           {isSubmitting ? 'Signing In' : 'Sign In'}
         </Button>
         

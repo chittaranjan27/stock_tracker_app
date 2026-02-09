@@ -117,6 +117,7 @@ declare global {
         t?: number;
     };
 
+
     type ProfileData = {
         name?: string;
         marketCapitalization?: number;
